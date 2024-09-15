@@ -1,0 +1,16 @@
+:root{
+    --primary-color: #FDFFFF;
+    --secondary-color: #B10F2E;
+    --terciary-color:  #570000;
+    --cuarto-color: #280000;
+    --quinto-color: #DE7C5A;
+    --error-color: #E84A5F;
+}
+
+.dark{
+    --background-color: #280000;
+}
+
+.light{
+    --background-color:#DE7C5A;
+}

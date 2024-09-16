@@ -15,22 +15,25 @@ const initialDataForm = {
 const EmpleadoForm = ({ empleadoSelected, handlerAdd }) => {
 
 	const [form, setForm] = useState(initialDataForm);
-
 	const { id, name,puesto, departamento, email, telefono, nroDocumento } = form;
 
 	useEffect(() => {
 		if (empleadoSelected) {
 			setForm(empleadoSelected);
-			console.log(empleadoSelected)
+			
 		  }
 	}, [empleadoSelected])
 
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		await handlerAdd(form);
+		  setForm(initialDataForm);
+
+	  };
+
 	return (
-		<form onSubmit={(e) => {
-			e.preventDefault();
-			handlerAdd(form)
-			setForm(initialDataForm);
-		}} action="">
+		//REVISAR CODIGO
+		<form onSubmit={handleSubmit} action="">
 
 			<div>
 				<label htmlFor='name' >Nombre: </label>

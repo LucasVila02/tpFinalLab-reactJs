@@ -7,7 +7,7 @@ import EmpleadosGrid from '../../components/EmpleadosGrid/EmpleadosGrid';
 
 const EmpleadosPage = () => {
 
-
+	const [error, setError] = useState('')
 	const [empleados, setEmpleados] = useState([]);
 	const[empleadoSelected, setEmpleadoSelected] = useState({
 	  id: 0,
@@ -28,21 +28,33 @@ const EmpleadosPage = () => {
 
 		getEmpleados()
 	}, [])
-	
 	const handlerAddEmpleado = async (empleado) => {
-		if(empleado.id > 0){
-		  const response = await update(empleado)
+		let response;
+	  
+		if (empleado.id > 0) {
+		  // Actualizar empleado
+		  response = await update(empleado);
+		  if (response.error) {
+			setError(response.error); // Mostrar error en la UI
+			return;
+		  }
 		  setEmpleados(empleados.map(e => {
-			if(e.id === response.data.id){
-			  return {...response.data}
+			if (e.id === response.data.id) {
+			  return { ...response.data };
 			}
 			return e;
 		  }));
-		}else{
-		  const response = await create(empleado)
+		} else {
+		  // Crear nuevo empleado
+		  response = await create(empleado);
+		  if (response.error) {
+			setError(response.error); // Mostrar error en la UI
+			return;
+		  }
 		  setEmpleados(empleados => [...empleados, response.data]);
 		}
-	  } 
+	  };
+
 	  
 	  const handlerRemoveEmpleado = (id) => {
 		console.log("ID a eliminar:", id);  // Verifica que este ID sea correcto
@@ -54,6 +66,8 @@ const EmpleadosPage = () => {
 	
 		setEmpleadoSelected({...empleado});
 	  }
+
+	  
 	
 
 	return (
@@ -67,6 +81,7 @@ const EmpleadosPage = () => {
 							empleadoSelected={empleadoSelected}
 							handlerAdd={handlerAddEmpleado}
 						/>
+						{error && <p style={{ color: 'red' }}>{error}</p>}
 					</div>
 
 					<div className='col'>

@@ -1,6 +1,6 @@
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { EmpleadoPage, EmpleadosPage, HomePage, LoginPage, NotFoundPage } from "../pages";
+import { CreateUserPage, EmpleadoPage, EmpleadosPage, HomePage, LoginPage, NotFoundPage } from "../pages";
 import { PrivateLayout, PublicLayout } from "../layouts";
 import PrivateRoute from "./PrivateRoute";
 
@@ -14,6 +14,7 @@ const AppRouter = () => {
             <Routes>
                 <Route path="/" element={<PublicLayout />}>
                     <Route path="/" element={<LoginPage />} />
+                    <Route path="/create-user" element={<CreateUserPage/>}/>
                 </Route>
 
 

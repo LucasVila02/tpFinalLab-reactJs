@@ -1,51 +1,55 @@
 import axios from "axios"
 
-const apiUrl = "http://localhost:8080/products";
+const baseUrl = "http://localhost:3000/users";
 
-export const findAll  = async () => {
-    try {
-      const response = await axios.get(apiUrl);
-      return response;
-    } catch (error) {
-      console.log(error)
-    }
-    return null;
+const getNextId = async () => {
+  try {
+    const response = await axios.get(baseUrl);
+    const empleados = response.data;
+
+    // Encuentra el ID máximo en los empleados existentes
+    const maxId = empleados.reduce((max, empleado) => {
+      // Convierte el ID a número para comparar
+      const idAsNumber = parseInt(empleado.id, 10);
+      return idAsNumber > max ? idAsNumber : max;
+    }, 0);
+
+    // Devuelve el siguiente ID como cadena
+    return (maxId + 1).toString();
+  } catch (error) {
+    console.error('Error al obtener el siguiente ID:', error);
+    return '1';  // En caso de error, comienza con ID 1
   }
-  
-  export const create = async  ({name, description, price}) =>{
-    try {
-      const response  =  await axios.post(apiUrl, {
-        name, // solo cuando se llama el atributo con el valor se puede abreviar
-        description,
-        price : price
-      });
-      return response;
-      
-    } catch (error) {
-      console.log(error);
-    }
-    return undefined;
-  };
-  
-  export const update = async  ({id, name, description, price}) =>{
-    try {
-      const response  =  await axios.put(`${apiUrl}/${id}`, {
-        name, // solo cuando se llama el atributo con el valor se puede abreviar
-        description,
-        price : price
-      });
-      return response;
-      
-    } catch (error) {
-      console.log(error);
-    }
-    return undefined;
-  };
-  
-  export const remove = async (id) =>{
-    try {
-     await axios.delete(`${apiUrl}/${id}`)    
-    } catch (error) {
-      console.log(error)
-    }
+};
+
+export const findAll = async () => {
+  try {
+    const response = await axios.get(baseUrl);
+    return response.data; // Devuelve solo los datos
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error al obtener los usuarios'); // Lanza un error que puede ser capturado en el submitForm
   }
+};
+
+
+export const create = async ({ name, email, password }) => {
+  try {
+
+    const nextId = await getNextId();
+
+    const response = await axios.post(baseUrl, {
+      id: nextId,
+      name,
+      email,
+      password
+    });
+    return response;
+
+  } catch (error) {
+    console.log(error);
+  }
+  return undefined;
+};
+
+

@@ -25,76 +25,94 @@ const getNextId = async () => {
   }
 };
 
-export const findAll  = async () => {
-    try {
-      const response = await axios.get(baseUrl);
-      return response;
-    } catch (error) {
-      console.log(error)
-    }
+export const findAll = async () => {
+  try {
+    const response = await axios.get(baseUrl);
+    return response;
+  } catch (error) {
+    console.log(error)
+  }
+  return null;
+}
+
+
+export const findById = async (id) => {
+  try {
+    const response = await axios.get(`${baseUrl}/${id}`);
+    return response;
+  } catch (error) {
+    console.error('Error al obtener el empleado por ID:', error);
     return null;
   }
+};
 
 
-  export const findById = async (id) => {
-    try {
-      const response = await axios.get(`${baseUrl}/${id}`);
-      return response;
-    } catch (error) {
-      console.error('Error al obtener el empleado por ID:', error);
-      return null;
+export const create = async ({ name, puesto, departamento, email, telefono, nroDocumento }) => {
+  try {
+    // Obtener todos los empleados
+    const empleadosResponse = await axios.get(baseUrl);
+    const empleados = empleadosResponse.data;
+
+    // Verificar duplicados
+    const isEmailDuplicated = empleados.some(e => e.email === email);
+    const isDocumentoDuplicated = empleados.some(e => e.nroDocumento === nroDocumento);
+    const isTelefonoDuplicated = empleados.some(e => e.telefono === telefono);
+
+    if (isEmailDuplicated) {
+      throw new Error("El email ya está en uso.");
     }
-  };
 
-  
-  export const create = async  ({name,puesto, departamento, email, telefono, nroDocumento }) =>{
-    try {
-      
-      const nextId = await getNextId();
+    if (isDocumentoDuplicated) {
+      throw new Error("El número de documento ya está en uso.");
+    }
 
-      const response  =  await axios.post(baseUrl, {
-        id : nextId,
-        name, 
-        puesto,
-        departamento,
-        email,
-        telefono,
-        nroDocumento
-      });
-      return response;
-      
-    } catch (error) {
-      console.log(error);
+    if (isTelefonoDuplicated) {
+      throw new Error("El teléfono ya está en uso.");
     }
-    return undefined;
-  };
-  
-  export const update = async  ({id, name,puesto, departamento, email, telefono, nroDocumento}) =>{
-    try {
-      const response  =  await axios.put(`${baseUrl}/${id}`, {
-        name, 
-        puesto,
-        departamento,
-        email,
-        telefono,
-        nroDocumento
-      });
-      return response;
-      
-    } catch (error) {
-      console.log(error);
-    }
-    return undefined;
-  };
-  
 
-  export const remove = async (id) => {
-    try {
-      const response = await axios.delete(`${baseUrl}/${id}`);
-      console.log('Respuesta del servidor:', response);
-      return response;
-    } catch (error) {
-      console.log('Error al eliminar empleado:', error);
-    }
-  };
-  
+    const nextId = await getNextId();
+
+    const response = await axios.post(baseUrl, {
+      id: nextId,
+      name,
+      puesto,
+      departamento,
+      email,
+      telefono,
+      nroDocumento
+    });
+    return response;
+
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
+export const update = async ({ id, name, puesto, departamento, email, telefono, nroDocumento }) => {
+  try {
+    const response = await axios.put(`${baseUrl}/${id}`, {
+      name,
+      puesto,
+      departamento,
+      email,
+      telefono,
+      nroDocumento
+    });
+    return response;
+
+  } catch (error) {
+    console.log(error);
+  }
+  return undefined;
+};
+
+
+export const remove = async (id) => {
+  try {
+    const response = await axios.delete(`${baseUrl}/${id}`);
+    console.log('Respuesta del servidor:', response);
+    return response;
+  } catch (error) {
+    console.log('Error al eliminar empleado:', error);
+  }
+};

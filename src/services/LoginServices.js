@@ -28,13 +28,21 @@ export const findAll = async () => {
     return response.data; // Devuelve solo los datos
   } catch (error) {
     console.log(error);
-    throw new Error('Error al obtener los usuarios'); // Lanza un error que puede ser capturado en el submitForm
+    throw new Error('Error al obtener los usuarios'); 
   }
 };
 
 
 export const create = async ({ name, email, password }) => {
   try {
+    
+    const empleadosResponse = await axios.get(baseUrl);
+    const empleados = empleadosResponse.data;
+
+    const isEmailDuplicated = empleados.some(e => e.email === email);
+    if (isEmailDuplicated) {
+      throw new Error("El email ya está en uso.");
+    }
 
     const nextId = await getNextId();
 
@@ -45,11 +53,8 @@ export const create = async ({ name, email, password }) => {
       password
     });
     return response;
-
   } catch (error) {
-    console.log(error);
+    return { error: error.message };
   }
-  return undefined;
 };
-
 

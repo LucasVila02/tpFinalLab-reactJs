@@ -7,6 +7,8 @@ import { useAuth } from '../../context/LoginContext';
 import { findAll } from '../../services/LoginServices';
 
 
+
+
 const LoginPage = () => {
 	const [error, setError] = useState("");
 	const navigate = useNavigate();
@@ -14,10 +16,10 @@ const LoginPage = () => {
 
 	const submitForm = async (e) => {
 		try {
-			const response = await findAll(); // Servicio que obtiene todos los usuarios
+
+			const response = await findAll();
 			const usuarios = response;
 
-			// Busca el usuario que coincida con el email
 			const usuarioEncontrado = usuarios.find(user => user.email === values.email);
 
 			if (!usuarioEncontrado) {
@@ -25,19 +27,18 @@ const LoginPage = () => {
 				return;
 			}
 
-			// Valida la contraseña
+
 			if (usuarioEncontrado.password !== values.password) {
 				setError('Contraseña incorrecta.');
 				return;
 			}
-			await onLogin(); // Función de autenticación
+			await onLogin();
 			navigate('/home');
 		} catch (error) {
-			console.error('Error al iniciar sesión:', error);
-			setError('Hubo un error al intentar iniciar sesión.');
+			setError('Hubo un error al intentar iniciar sesión.', error);
 		}
 	}
-	const { values, handleChange, handleSubmit } = useForm({ email: "", password: "" }, submitForm);
+	const { values, handlerChange, handlerSubmit } = useForm({ email: "", password: "" }, submitForm);
 
 	if (isLogged) {
 		return <Navigate to='/home' />
@@ -56,15 +57,15 @@ const LoginPage = () => {
 					<h1>
 						Bienvenido a EmpleaPro!
 					</h1>
-					<form onSubmit={handleSubmit}>
+					<form onSubmit={handlerSubmit}>
 						<div className={styles.formGroup}>
 							<label htmlFor='email'>Email: </label>
-							<input type="email" name="email" id="email" required value={values.email} onChange={handleChange} />
+							<input type="email" name="email" id="email" required value={values.email} onChange={handlerChange} />
 						</div>
 
 						<div className={styles.formGroup}>
 							<label htmlFor='password'>Password: </label>
-							<input type="password" name="password" id="password" required value={values.password} onChange={handleChange} />
+							<input type="password" name="password" id="password" required value={values.password} onChange={handlerChange} />
 						</div>
 
 						<button type='submit'>Login</button>

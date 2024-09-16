@@ -14,7 +14,6 @@ const EmpleadoPage = () => {
 		setEmpleado(result.data)
 	}
 	useEffect(() => {
-	
 		getEmpleado()
 	}, [])
 

@@ -1,55 +1,57 @@
 "use client";
-import { useEffect, useState } from 'react';
-
-const initialDataForm = {
-	id: 0,
-	name: '',
-	puesto: '',
-	departamento: '',
-	email: '',
-	telefono: '',
-	nroDocumento: ''
-}
-
+import { useEffect} from 'react';
+import { useForm } from '../../hooks';
 
 const EmpleadoForm = ({ empleadoSelected, handlerAdd }) => {
 
-	const [form, setForm] = useState(initialDataForm);
-	const { id, name,puesto, departamento, email, telefono, nroDocumento } = form;
+	const submitForm = async () => {
+		await handlerAdd(values);
+		setValues({
+			id: "",
+			name: "",
+			puesto: "",
+			departamento: "",
+			email: "",
+			telefono: "",
+			nroDocumento: ""
+		});
+		
+	  };
+
+	const { values, handlerChange, handlerSubmit, setValues, errors } = useForm({ 
+		id: "", 
+		name: "",
+		puesto: "", 
+		departamento: "", 
+		email: "", 
+		telefono: "", 
+		nroDocumento: ""
+	}, submitForm);
 
 	useEffect(() => {
 		if (empleadoSelected) {
-			setForm(empleadoSelected);
-			
+			setValues(empleadoSelected);
 		  }
 	}, [empleadoSelected])
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		await handlerAdd(form);
-		  setForm(initialDataForm);
-
-	  };
 
 	return (
 		//REVISAR CODIGO
-		<form onSubmit={handleSubmit} action="">
+		<form onSubmit={handlerSubmit} action="">
 
 			<div>
 				<label htmlFor='name' >Nombre: </label>
 				<input
+					
 					className='form-control my-3 w-75'
 					placeholder='Name'
 					type='text'
 					name='name'
 					required
-					value={name}
-					onChange={(e) => setForm({
-						...form,
-						name: e.target.value
-					})}
-				>
-				</input>
+					value={values.name}
+					onChange={handlerChange}
+				/>
+				  {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
 			</div>
 			
 			<div>
@@ -60,13 +62,10 @@ const EmpleadoForm = ({ empleadoSelected, handlerAdd }) => {
 					name='puesto'
 					type='text'
 					required
-					value={puesto}
-					onChange={(e) => setForm({
-						...form,
-						puesto: e.target.value
-					})}
-				>
-				</input>
+					value={values.puesto}
+					onChange={handlerChange}
+				/>
+				 {errors.puesto && <p style={{ color: 'red' }}>{errors.puesto}</p>}
 
 			</div>
 			<div>
@@ -77,13 +76,10 @@ const EmpleadoForm = ({ empleadoSelected, handlerAdd }) => {
 					name='departamento'
 					type='text'
 					required
-					value={departamento}
-					onChange={(e) => setForm({
-						...form,
-						departamento: e.target.value
-					})}
-				>
-				</input>
+					value={values.departamento}
+					onChange={handlerChange}
+				/>
+				 {errors.departamento && <p style={{ color: 'red' }}>{errors.departamento}</p>}
 
 			</div>
 			<div>
@@ -94,13 +90,10 @@ const EmpleadoForm = ({ empleadoSelected, handlerAdd }) => {
 					name='email'
 					type='email'
 					required
-					value={email}
-					onChange={(e) => setForm({
-						...form,
-						email: e.target.value
-					})}
-				>
-				</input>
+					value={values.email}
+					onChange={handlerChange}
+				/>
+				{errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
 
 			</div>
 			<div>
@@ -110,14 +103,11 @@ const EmpleadoForm = ({ empleadoSelected, handlerAdd }) => {
 					placeholder='Telefono'
 					name='telefono'
 					type='number'
-					value={telefono}
+					value={values.telefono}
 					required
-					onChange={(e) => setForm({
-						...form,
-						telefono: e.target.value
-					})}
-				>
-				</input>
+					onChange={handlerChange}
+				/>
+				{errors.telefono && <p style={{ color: 'red' }}>{errors.telefono}</p>}
 			</div>
 			
 
@@ -129,17 +119,14 @@ const EmpleadoForm = ({ empleadoSelected, handlerAdd }) => {
 				name='nroDocumento'
 				type='number'
 				required
-				value={nroDocumento}
-				onChange={(e) => setForm({
-					...form,
-					nroDocumento: e.target.value
-				})}
-			>
-			</input>
+				value={values.nroDocumento}
+				onChange={handlerChange}
+			/>
+			{errors.nroDocumento && <p style={{ color: 'red' }}>{errors.nroDocumento}</p>}
 			</div>
 			<div>
 				<button type='submit' className='btn btn-primary'>
-					{id > 0 ? "Update" : "Create"}
+					{values.id > 0 ? "Update" : "Create"}
 				</button>
 
 			</div>

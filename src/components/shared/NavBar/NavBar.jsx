@@ -7,6 +7,7 @@ import { useAuth } from "../../../context/LoginContext";
 
 import ModeNightIcon from '@mui/icons-material/ModeNight';
 import LightModeIcon from '@mui/icons-material/LightMode';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const NavBar = () => {
 
@@ -22,14 +23,14 @@ const NavBar = () => {
 
 	return (
 		<nav className={styles.navGroup}>
-			<NavLink to={"/"} >Lucas Vila</NavLink>
+			<NavLink to={"/"} >EMPLEA-PRO</NavLink>
 
 			<div>
 				<NavLink to="/home" activeclassname="active">Home</NavLink>
 				<NavLink to="/empleados" activeclassname="active">Empleados</NavLink>
 
-				{/* componente */}
-				<button onClick={toggleTheme}>{
+				
+				<button className={styles.modeOn} onClick={toggleTheme}>{
 					theme === "dark" ? (
 						<LightModeIcon fontSize='small'/>
 					) : (
@@ -38,11 +39,11 @@ const NavBar = () => {
 				</button>
 
 				<button
-					className={styles.button}
+					className={styles.onLogout}
 					type="button"
 					onClick={handleLogout}
 				>
-					Logout
+					<LogoutIcon fontSize='small'/>
 				</button>
 			</div>
 

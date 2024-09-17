@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import EmpleadosListas from '../EmpleadosListas/EmpleadosListas';
+import styles from './EmpleadosGrid.module.css';
 
 const EmpleadosGrid = ({ handlerEmpleadoSelected, handlerRemoveEmpleado, empleados = [] }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -20,18 +21,16 @@ const EmpleadosGrid = ({ handlerEmpleadoSelected, handlerRemoveEmpleado, emplead
   };
 
   return (
-    <div>
-
+    <div className={styles.container}>
       <input
         type="text"
-        className="form-control mb-3"
+        className={styles.searchInput}
         placeholder="Buscar empleado por nombre, puesto o email"
         value={searchTerm}
         onChange={handleSearchChange}
       />
 
-
-      <table className="table table-hover table-striped">
+      <table className={`table ${styles.table}`}>
         <thead>
           <tr>
             <th>Nombre</th>
@@ -54,7 +53,7 @@ const EmpleadosGrid = ({ handlerEmpleadoSelected, handlerRemoveEmpleado, emplead
             ))
           ) : (
             <tr>
-              <td colSpan="6" className="text-center">
+              <td colSpan="6" className={styles.noResults}>
                 No se encontraron empleados.
               </td>
             </tr>

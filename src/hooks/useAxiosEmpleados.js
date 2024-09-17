@@ -26,19 +26,29 @@ const useAxiosEmpleados = () => {
     
       let response;
       if (empleado.id > 0) {
-        // Actualizar empleado
+       
         response = await update(empleado);
         if (response.error) {
           setError(response.error);
+
+          setTimeout(() => {
+            setError('');
+          }, 4000);
+
           return;
         }
         setEmpleados(empleados.map(e => e.id === response.data.id ? { ...response.data } : e));
         setError('')
       } else {
-        // Crear nuevo empleado
+       
         response = await create(empleado);
         if (response.error) {
           setError(response.error);
+
+          setTimeout(() => {
+            setError('');
+          }, 4000);
+
           return;
         }
         setEmpleados(empleados => [...empleados, response.data]);

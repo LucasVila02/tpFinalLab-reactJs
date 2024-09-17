@@ -8,6 +8,9 @@ h1{
     font-size: 16px;
 }
 
+
 .active{
-    background-color: black;
+    color: #0776eb; 
+    border-bottom: 2px solid #0776eb;
+    padding-bottom: 0.25rem;
 }

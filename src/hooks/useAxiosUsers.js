@@ -15,7 +15,12 @@ const useAxiosUser = () => {
 
       const response = await create(form);
       if (response.error) {
-        setError(response.error); // Mostrar error en la UI
+        setError(response.error);
+        
+        setTimeout(() => {
+          setError('');
+        }, 4000);
+        
         return;
         }
       setUser(user => [...user, response.data]);

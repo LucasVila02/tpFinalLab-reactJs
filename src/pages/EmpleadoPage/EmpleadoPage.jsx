@@ -18,15 +18,16 @@ const EmpleadoPage = () => {
 	}, [])
 
 	return (
-		<div className={styles.empleadopage}>
- 			<br />{empleado.name}
-			 <br />{empleado.puesto}
-			 <br />{empleado.departamento}
-			 <br />{empleado.email}
-			 <br />{empleado.telefono}
-			 <br />{empleado.nroDocumento}
-			 <br /> <Link to={'/empleados'}>Volver</Link>
- 		</div>
+		<div className={styles.card}>
+      <h2>Detalles del Empleado</h2>
+      <p><strong>Nombre:</strong> {empleado.name}</p>
+      <p><strong>Puesto:</strong> {empleado.puesto}</p>
+      <p><strong>Departamento:</strong> {empleado.departamento}</p>
+      <p><strong>Email:</strong> {empleado.email}</p>
+      <p><strong>Teléfono:</strong> {empleado.telefono}</p>
+      <p><strong>Número de Documento:</strong> {empleado.nroDocumento}</p>
+      <Link to="/empleados" className={styles.backLink}>Volver a la lista de empleados</Link>
+    </div>
 	);
 };
 

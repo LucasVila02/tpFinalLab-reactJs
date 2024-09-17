@@ -24,19 +24,30 @@ const LoginPage = () => {
 
 			if (!usuarioEncontrado) {
 				setError('El email no está registrado.');
+				setTimeout(() => {
+					setError('');
+				}, 3000);
 				return;
 			}
 
 
 			if (usuarioEncontrado.password !== values.password) {
 				setError('Contraseña incorrecta.');
+				setTimeout(() => {
+					setError('');
+				}, 3000);
 				return;
 			}
+
+			
+
 			await onLogin();
 			navigate('/home');
 		} catch (error) {
 			setError('Hubo un error al intentar iniciar sesión.', error);
 		}
+
+		
 	}
 	const { values, handlerChange, handlerSubmit } = useForm({ email: "", password: "" }, submitForm);
 

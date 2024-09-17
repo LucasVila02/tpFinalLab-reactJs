@@ -1,6 +1,6 @@
 "use client";
 
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './NotFoundPage.module.css';
 
 

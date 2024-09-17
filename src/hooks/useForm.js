@@ -41,15 +41,10 @@ const useForm = (initialValues, callback) => {
   };
 
   const handlerChange = (e) => {
-    const { name, value, type } = e.target;
+    const { name, value } = e.target;
     setValues((prevState) => ({
       ...prevState,
       [name]: value,
-    }));
-    const error = validate(name, value, type);
-    setErrors((prevState) => ({
-      ...prevState,
-      [name]: error ? error : '', 
     }));
   };
 
@@ -70,6 +65,10 @@ const useForm = (initialValues, callback) => {
       callback();
     } else {
       setErrors(newErrors);
+
+      setTimeout(() => {
+        setErrors({});
+      }, 4000);
     }
   };
 

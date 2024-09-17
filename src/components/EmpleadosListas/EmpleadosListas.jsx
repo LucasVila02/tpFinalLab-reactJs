@@ -1,5 +1,6 @@
 "use client";
 import { useNavigate } from 'react-router-dom';
+import styles from './EmpleadosListas.module.css';
 
 const EmpleadosListas = ({handlerEmpleadoSelected, handlerRemoveEmpleado, empleado = []}) => {
 
@@ -10,22 +11,22 @@ const EmpleadosListas = ({handlerEmpleadoSelected, handlerRemoveEmpleado, emplea
   }
 
 	return (
-		<tr >
+		<tr className={styles.tableRow}>
       <td>{empleado.name}</td>
       <td>{empleado.puesto}</td>
       <td>{empleado.email}</td>
       <td>
-        <button className='btn btn-secondary btn-sm' onClick={handlerMoreInfo} >
-            +Info
+        <button className={`${styles.btn} ${styles['btn-secondary']} ${styles['btn-sm']}`} onClick={handlerMoreInfo}>
+          +Info
         </button>
       </td>
       <td>
-        <button className='btn btn-secondary btn-sm' onClick={( ) => handlerEmpleadoSelected(empleado)}>
-            Update
+        <button className={`${styles.btn} ${styles['btn-secondary']} ${styles['btn-sm']}`} onClick={() => handlerEmpleadoSelected(empleado)}>
+          Update
         </button>
       </td>
       <td>
-        <button className='btn btn-danger btn-sm' onClick={() => handlerRemoveEmpleado(empleado.id)}>
+        <button className={`${styles.btn} ${styles['btn-danger']} ${styles['btn-sm']}`} onClick={() => handlerRemoveEmpleado(empleado.id)}>
           Delete
         </button>
       </td>

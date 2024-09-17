@@ -1,6 +1,3 @@
-.navbar {
-  
-}
 
 
 .navGroup a{
@@ -9,11 +6,15 @@
     font-weight: bold;
 }
 
+.modeOn{
+    background-color:#0056b3 ;
+}
 
 .navGroup{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+   
 }
 
 .navGroup div{
@@ -21,3 +22,15 @@
     gap: 20px;
     text-decoration: none;
 }
+
+.onLogout{
+    background-color: #0056b3;
+    
+}
+
+.onLogout:hover{
+    background-color: #24265a;
+    
+}
+
+

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect} from 'react';
 import { useForm } from '../../hooks';
+import styles from './EmpleadoForm.module.css';
 
 const EmpleadoForm = ({ empleadoSelected, handlerAdd }) => {
 
@@ -36,101 +37,98 @@ const EmpleadoForm = ({ empleadoSelected, handlerAdd }) => {
 
 
 	return (
-		//REVISAR CODIGO
-		<form onSubmit={handlerSubmit} action="">
+		
+		<form onSubmit={handlerSubmit} className={styles.formContainer}>
+      <div className={styles.formGroup}>
+        <label htmlFor='name'>Nombre:</label>
+        <input
+          className='form-control'
+          placeholder='Nombre'
+          type='text'
+          name='name'
+          required
+          value={values.name}
+          onChange={handlerChange}
+        />
+        {errors.name && <p className={styles.error}>{errors.name}</p>}
+      </div>
 
-			<div>
-				<label htmlFor='name' >Nombre: </label>
-				<input
-					
-					className='form-control my-3 w-75'
-					placeholder='Name'
-					type='text'
-					name='name'
-					required
-					value={values.name}
-					onChange={handlerChange}
-				/>
-				  {errors.name && <p style={{ color: 'red' }}>{errors.name}</p>}
-			</div>
-			
-			<div>
-			<label htmlFor='puesto' >Puesto: </label>
-				<input
-					className='form-control my-3 w-75'
-					placeholder='Puesto'
-					name='puesto'
-					type='text'
-					required
-					value={values.puesto}
-					onChange={handlerChange}
-				/>
-				 {errors.puesto && <p style={{ color: 'red' }}>{errors.puesto}</p>}
+      <div className={styles.formGroup}>
+        <label htmlFor='puesto'>Puesto:</label>
+        <input
+          className='form-control'
+          placeholder='Puesto'
+          name='puesto'
+          type='text'
+          required
+          value={values.puesto}
+          onChange={handlerChange}
+        />
+        {errors.puesto && <p className={styles.error}>{errors.puesto}</p>}
+      </div>
 
-			</div>
-			<div>
-			<label htmlFor='departamento' >Departamento: </label>
-				<input
-					className='form-control my-3 w-75'
-					placeholder='Departamento'
-					name='departamento'
-					type='text'
-					required
-					value={values.departamento}
-					onChange={handlerChange}
-				/>
-				 {errors.departamento && <p style={{ color: 'red' }}>{errors.departamento}</p>}
+      <div className={styles.formGroup}>
+        <label htmlFor='departamento'>Departamento:</label>
+        <input
+          className='form-control'
+          placeholder='Departamento'
+          name='departamento'
+          type='text'
+          required
+          value={values.departamento}
+          onChange={handlerChange}
+        />
+        {errors.departamento && <p className={styles.error}>{errors.departamento}</p>}
+      </div>
 
-			</div>
-			<div>
-			<label htmlFor='email' >Email: </label>
-				<input
-					className='form-control my-3 w-75'
-					placeholder='Email'
-					name='email'
-					type='email'
-					required
-					value={values.email}
-					onChange={handlerChange}
-				/>
-				{errors.email && <p style={{ color: 'red' }}>{errors.email}</p>}
+      <div className={styles.formGroup}>
+        <label htmlFor='email'>Email:</label>
+        <input
+          className='form-control'
+          placeholder='Email'
+          name='email'
+          type='email'
+          required
+          value={values.email}
+          onChange={handlerChange}
+        />
+        {errors.email && <p className={styles.error}>{errors.email}</p>}
+      </div>
 
-			</div>
-			<div>
-			<label htmlFor='telefono' >Telefono: </label>
-				<input
-					className='form-control my-3 w-75'
-					placeholder='Telefono'
-					name='telefono'
-					type='number'
-					value={values.telefono}
-					required
-					onChange={handlerChange}
-				/>
-				{errors.telefono && <p style={{ color: 'red' }}>{errors.telefono}</p>}
-			</div>
-			
+      <div className={styles.formGroup}>
+        <label htmlFor='telefono'>Telefono:</label>
+        <input
+          className='form-control'
+          placeholder='Telefono'
+          name='telefono'
+          type='number'
+          required
+          value={values.telefono}
+          onChange={handlerChange}
+        />
+        {errors.telefono && <p className={styles.error}>{errors.telefono}</p>}
+      </div>
 
-			<div>
-			<label htmlFor='nroDocumento' >Nro. Documento: </label>
-			<input
-				className='form-control my-3 w-75'
-				placeholder='nroDocumento'
-				name='nroDocumento'
-				type='number'
-				required
-				value={values.nroDocumento}
-				onChange={handlerChange}
-			/>
-			{errors.nroDocumento && <p style={{ color: 'red' }}>{errors.nroDocumento}</p>}
-			</div>
-			<div>
-				<button type='submit' className='btn btn-primary'>
-					{values.id > 0 ? "Update" : "Create"}
-				</button>
+      <div className={styles.formGroup}>
+        <label htmlFor='nroDocumento'>Nro. Documento:</label>
+        <input
+          className='form-control'
+          placeholder='Nro. Documento'
+          name='nroDocumento'
+          type='number'
+          required
+          value={values.nroDocumento}
+          onChange={handlerChange}
+        />
+        {errors.nroDocumento && <p className={styles.error}>{errors.nroDocumento}</p>}
+      </div>
 
-			</div>
-		</form>
+      <div>
+        <button type='submit' className={styles.submitButton}>
+          {values.id > 0 ? "Actualizar" : "Crear"}
+        </button>
+      </div>
+    </form>
 	);
 };
 

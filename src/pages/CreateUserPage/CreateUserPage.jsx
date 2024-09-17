@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import useAxiosUser from "../../hooks/useAxiosUsers";
-// import styles from './CreateUserPage.module.css';
+import styles from './CreateUserPage.module.css';
+import { Link } from "react-router-dom";
 
 const initialDataForm = {
 	name: '',
@@ -22,74 +23,67 @@ const CreateUserPage = () => {
 		setForm(initialDataForm);
 	};
 	return (
+		<div className={styles.formContainer}>
+		<h2>Crear nuevo usuario</h2>
+		<form onSubmit={handlerSubmit}>
+		  <div className={styles.formGroup}>
+			<label htmlFor='name'>Nombre:</label>
+			<input
+			  placeholder='Name'
+			  type='text'
+			  name='name'
+			  required
+			  value={name}
+			  onChange={(e) => setForm({
+				...form,
+				name: e.target.value
+			  })}
+			/>
+		  </div>
+  
+		  <div className={styles.formGroup}>
+			<label htmlFor='email'>Email:</label>
+			<input
+			  placeholder='Email'
+			  name='email'
+			  type='email'
+			  required
+			  value={email}
+			  onChange={(e) => setForm({
+				...form,
+				email: e.target.value
+			  })}
+			/>
+		  </div>
+  
+		  <div className={styles.formGroup}>
+			<label htmlFor='password'>Password:</label>
+			<input
+			  placeholder='Password'
+			  name='password'
+			  type='password'
+			  value={password}
+			  required
+			  onChange={(e) => setForm({
+				...form,
+				password: e.target.value
+			  })}
+			/>
+		  </div>
+  
+		  <div>
+			<button type='submit'>
+			  Create
+			</button>
+		  </div>
+		
+		</form>
+		<Link to={'/'}>Tienes cuenta? Inicia Sesión</Link>
+		{error && <p className={styles.error}>{error}</p>}
 
-		<>
-			<form onSubmit={handlerSubmit} action="">
-
-				<div>
-					<label htmlFor='name' >Nombre: </label>
-					<input
-						className='form-control my-3 w-75'
-						placeholder='Name'
-						type='text'
-						name='name'
-						required
-						value={name}
-						onChange={(e) => setForm({
-							...form,
-							name: e.target.value
-						})}
-					>
-					</input>
-				</div>
-
-				<div>
-					<label htmlFor='email' >Email: </label>
-					<input
-						className='form-control my-3 w-75'
-						placeholder='Email'
-						name='email'
-						type='email'
-						required
-						value={email}
-						onChange={(e) => setForm({
-							...form,
-							email: e.target.value
-						})}
-					>
-					</input>
-				</div>
-
-				<div>
-					<label htmlFor='password' >Password: </label>
-					<input
-						className='form-control my-3 w-75'
-						placeholder='Password'
-						name='password'
-						type='password'
-						value={password}
-						required
-						onChange={(e) => setForm({
-							...form,
-							password: e.target.value
-						})}
-					>
-					</input>
-				</div>
-
-				<div>
-					<button type='submit' className='btn btn-primary'>
-						Create
-					</button>
-
-				</div>
-
-			</form>
-			{error && <p style={{ color: 'red' }}>{error}</p>}
-		</>
-
+	  </div>
 	);
-};
+  };
 
 CreateUserPage.propTypes = {};
 

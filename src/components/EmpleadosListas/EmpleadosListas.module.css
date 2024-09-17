@@ -1,3 +1,42 @@
-.empleadoslistas {
+.tableRow {
+    cursor: pointer;
+    transition: background-color 0.3s;
+     
+  }
   
-}
+  .tableRow:hover {
+    background-color: #f1f1f1; 
+  }
+  
+
+  .btn {
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #5a6268;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+ 
+  .btn-sm {
+    font-size: 12px;
+    padding: 3px 6px;
+  }

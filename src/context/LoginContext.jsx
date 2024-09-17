@@ -1,13 +1,13 @@
 import { createContext, useContext, useEffect, useState} from "react"
 
-//Crear Contexto
+
 const LoginContext = createContext();
 
 
-// Hook para acceder al contexto
+
 export const useAuth = () => useContext(LoginContext);
 
-//provider
+
 export const LoginProvider = ({children}) => {
 
     const [isLogged, setIsLogged] = useState(false);
@@ -36,7 +36,7 @@ export const LoginProvider = ({children}) => {
         setLoading(false)
     } 
 
-    //revisar este codigo si es necesario
+   
     const sleep = (ms) => new Promise( (resolve) =>setTimeout(resolve, ms))
 
     const onLogout = () => {

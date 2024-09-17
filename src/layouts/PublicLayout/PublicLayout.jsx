@@ -6,9 +6,18 @@ import styles from './PublicLayout.module.css';
 const PublicLayout = () => {
 	return (
 		<div className={styles.publiclayout}>
-			<h1>Public Layout</h1>
- 			<Outlet/>
- 		</div>
+			<header className={styles.header}>
+				<h1>Bienvenidos a Emplea-PRO</h1>
+			</header>
+
+			<main className={styles.content}>
+				<Outlet />
+			</main>
+
+			<footer className={styles.footer}>
+				<p>&copy; 2024 Emplea-PRO</p>
+			</footer>
+		</div>
 	);
 };
 

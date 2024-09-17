@@ -2,48 +2,49 @@
 import EmpleadoForm from '../../components/EmpleadoForm/EmpleadoForm';
 import EmpleadosGrid from '../../components/EmpleadosGrid/EmpleadosGrid';
 import useAxiosEmpleados from '../../hooks/useAxiosEmpleados';
+import styles from './EmpleadosPage.module.css';
 
 const EmpleadosPage = () => {
-	const {
-		empleados,
-		empleadoSelected,
-		error,
-		handlerAddEmpleado,
-		handlerRemoveEmpleado,
-		handlerEmpleadoSelected
-	} = useAxiosEmpleados();
+  const {
+    empleados,
+    empleadoSelected,
+    error,
+    handlerAddEmpleado,
+    handlerRemoveEmpleado,
+    handlerEmpleadoSelected
+  } = useAxiosEmpleados();
 
-	return (
+  return (
 
-		<>
-			<div className='container my-4'>
-				<h1>Empleados</h1>
-				<div className='row' >
-					<div className='col'>
-						<EmpleadoForm
-							empleadoSelected={empleadoSelected}
-							handlerAdd={handlerAddEmpleado}
-						/>
-						{error && <p style={{ color: 'red' }}>{error}</p>}
-					</div>
+    <>
+      <div className={styles.container}>
+        <h1>Empleados</h1>
+        <div className={styles.row}>
+          <div className={styles.col}>
+            <EmpleadoForm
+              empleadoSelected={empleadoSelected}
+              handlerAdd={handlerAddEmpleado}
+            />
+            {error && <p className={styles.error}>{error}</p>}
+          </div>
+          <div className={styles.col}>
+            {empleados.length > 0 ? (
+              <EmpleadosGrid
+                handlerEmpleadoSelected={handlerEmpleadoSelected}
+                handlerRemoveEmpleado={handlerRemoveEmpleado}
+                empleados={empleados}
+              />
+            ) : (
+              <div className={styles.alert}>No hay empleados en el sistema</div>
+            )}
+          </div>
+        </div>
+      </div>
 
-					<div className='col'>
-						{empleados.length > 0 ?
-							<EmpleadosGrid
-								handlerEmpleadoSelected={handlerEmpleadoSelected}
-								handlerRemoveEmpleado={handlerRemoveEmpleado}
-								empleados={empleados} />
-							: <div className='alert alert-warning'>No hay empleados en el sistema</div>
-						}
-
-					</div>
-				</div>
-			</div>
-
-		</>
+    </>
 
 
-	);
+  );
 };
 
 EmpleadosPage.propTypes = {};

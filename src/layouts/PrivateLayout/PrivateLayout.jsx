@@ -13,16 +13,16 @@ const PrivateLayout = () => {
 
 	return (
 		<div className={`${styles.privatelayout} ${theme}`}>
- 			<header className={styles.header}>
-				<NavBar/>
+			<header className={styles.header}>
+				<NavBar />
 			</header>
 			<main className={styles.main}>
-				<Outlet/>
+				<Outlet />
 			</main>
 			<footer className={styles.footer}>
-				Private Footer @2024
+				&copy; 2024 Emplea-PRO
 			</footer>
- 		</div>
+		</div>
 	);
 };
 

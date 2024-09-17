@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Pedro Sanchez",
+      "email": "pedro@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "2",
+      "name": "Juana Morinigo",
+      "email": "juana@gmail.com",
+      "password": "1234"
+    }
+  ],
+  "empleados": [
+    {
+      "id": "1",
+      "name": "Lautaro Perez",
+      "puesto": "Administrativo",
+      "departamento": "Ventas",
+      "email": "lautaro@gmai.com",
+      "telefono": "12543463",
+      "nroDocumento": "43087291"
+    },
+    {
+      "name": "Gonzalo Guzman",
+      "puesto": "Jefe",
+      "departamento": "Compras",
+      "email": "gonza@gmail.com",
+      "telefono": "24125555",
+      "nroDocumento": "34213978",
+      "id": "2"
+    },
+    {
+      "id": "3",
+      "name": "Jorge Portillo",
+      "puesto": "Administrativo",
+      "departamento": "RRHH",
+      "email": "Jorge@gmail.com",
+      "telefono": "12546234",
+      "nroDocumento": "23452983"
+    },
+    {
+      "id": "4",
+      "name": "Rodrigo Tuxon",
+      "puesto": "Vendedor",
+      "departamento": "Ventas",
+      "email": "rodrigo@corre.com",
+      "telefono": "63421412",
+      "nroDocumento": "23345432"
+    }
+  ]
+}

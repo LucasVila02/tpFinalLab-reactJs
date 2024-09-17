@@ -1,4 +1,5 @@
 Trabajo Práctico N°4 - ReactJs / Json-Server - Administrador de Empleados
+
 Descripción
 Este proyecto es una aplicación web sencilla desarrollada con ReactJS para administrar empleados. Utiliza Json-Server como base de datos simulada, lo que facilita su configuración y uso durante el desarrollo. La aplicación permite realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) sobre los empleados, gestionando la información básica y validando datos importantes como el email, número de documento, y número de teléfono.
 
